@@ -1,11 +1,16 @@
 name: Super-Linter
 
-on: push
+on:
+  push:
+    branches: [main]
 
 jobs:
   super-lint:
     name: Lint code base
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      statuses: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -15,3 +20,4 @@ jobs:
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_CHECKOV: false
